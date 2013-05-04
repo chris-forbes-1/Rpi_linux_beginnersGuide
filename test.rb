@@ -20,7 +20,7 @@ end
 while menu_go
 	puts "Logged in as : #{username}"
 	puts "Menu"
-	puts "1: print current working directory"
+	puts "1: print current working directory & List Documents"
 	puts "2: Change working directory"
 	puts "3: Open vim / emacs"
 	puts "4: ftp"
@@ -37,14 +37,17 @@ while menu_go
 when 1
 	system("clear")
         system("pwd")
-          
+          Dir.foreach(Dir.pwd) do |item|
+          	next if item == '.' or item == '=='
+          	puts item
+          end
 	gets.chomp
 	system("clear")
 
 when 2
 	puts "Please enter the directory you wish to change to"
 	change_dir = gets.chomp.to_s
-	system "cd #{change_dir}"
+	Dir.chdir(change_dir)
 
 when 3
 	puts " please select which one you would like to execute"
